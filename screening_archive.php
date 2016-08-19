@@ -5,6 +5,9 @@
 
 $args = array(
     'post_type' => 'screening_details',
+    'order'=> 'ASC',
+    'orderby' => 'meta_value_num',
+    'meta_key' => 'fs_screening_date'
 
     );
 $the_query = new WP_Query( $args ); 
@@ -42,7 +45,7 @@ $the_query = new WP_Query( $args );
         <td>
 
         <?php if (isset($filmTime[0])):?>
-            <p><?php $timestamp = $filmTime[0];?><?php echo gmdate("H:i:s", $timestamp);?></p>
+            <p><?php $timestamp = $filmTime[0];?><?php //echo gmdate("H:i:s", $timestamp);?></p>
         <?php endif;?>
 
         </td>
@@ -50,7 +53,7 @@ $the_query = new WP_Query( $args );
         <td>
 
         <?php if (isset($filmDate[0])):?>
-            <p><?php $datestamp = $filmDate[0];?><?php echo gmdate("Y-m-d", $datestamp);?></p>
+            <p><?php $datestamp = $filmDate[0];?><?php echo gmdate("F j, Y", $datestamp);?></p>
         <?php endif;?>
 
         </td>
