@@ -224,22 +224,39 @@ class Screening {
 }
 
 
-
 new Screening();
 
 
 
+class Templates{
 
-            function get_custom_post_type_template($single_template) {
+    public function __construct() {
+        function get_custom_post_type_template($single_template) {
             global $post;
 
             if ($post->post_type == 'screening_details') {
-              $single_template = plugin_dir_path( __FILE__ )  . '/screening_details.php';
+                $single_template = plugin_dir_path( __FILE__ )  . '/screening_details.php';
             }
             return $single_template;
-            }
+        }
         
-add_filter( 'single_template', 'get_custom_post_type_template' );
+        add_filter( 'single_template', 'get_custom_post_type_template' );
 
+        function get_custom_post_archive_template( $archive_template ) {
+            global $post;
+
+            if ( is_post_type_archive ( 'screening_details' ) ) {
+                $archive_template = plugin_dir_path( __FILE__ )  . '/screening_archive.php';
+            }
+            return $archive_template;
+            }
+
+        add_filter( 'archive_template', 'get_custom_post_archive_template' ) ;
+
+    }
+
+}
+
+new Templates();
 
 ?>
