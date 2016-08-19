@@ -132,21 +132,21 @@ class Screening {
                   ) );
 
                   // adds a timepicker field to the 1st group
-              x_add_metadata_field( 'fs_fieldTimepicker1', 'screening_details', array(
+              x_add_metadata_field( 'fs_screening_time', 'screening_details', array(
                   'group' => 'x_metaBox1',
                   'field_type' => 'timepicker',
                   'label' => 'Screening Time',
                 ) );
 
               // adds a datepicker field to the 1st group
-              x_add_metadata_field( 'fs_fieldDatepicker1', 'screening_details', array(
+              x_add_metadata_field( 'fs_screening_date', 'screening_details', array(
                   'group' => 'x_metaBox1',
                   'field_type' => 'datepicker',
                   'label' => 'Screening Date',
                 ) );
 
                 // adds a taxonomy select field in the first group
-                x_add_metadata_field( 'x_field_taxonomy_select', 'screening_details', array(
+                x_add_metadata_field( 'fs_screening_location', 'screening_details', array(
                         'group' => 'x_metaBox1',
                         'field_type' => 'taxonomy_select',
                         'taxonomy' => 'screening_location',
@@ -156,7 +156,7 @@ class Screening {
 
 
               // adds a wysiwyg (full editor) field to the 2nd group
-              x_add_metadata_field( 'fs_fieldWysiwyg1', 'screening_details', array(
+              x_add_metadata_field( 'fs_film_description', 'screening_details', array(
                   'group' => 'x_metaBox1',
                   'field_type' => 'wysiwyg',
                   'label' => 'Description of Film',
@@ -188,9 +188,9 @@ class Screening {
                     ) );
 
                   // adds a link field with placeholder
-              x_add_metadata_field( 'fs_field_link_placeholder', 'screening_details', array(
+              x_add_metadata_field( 'fs_film_website', 'screening_details', array(
                   'group' => 'x_metaBox1',
-                  'field_type' => 'link',
+                  'field_type' => 'text',
                   'label' => 'Link to film website',
                   'placeholder' => 'full website url',
                 ) );
@@ -214,7 +214,7 @@ class Screening {
                       // adds a link field with placeholder
               x_add_metadata_field( 'fs_tickets', 'screening_details', array(
                   'group' => 'x_metaBox1',
-                  'field_type' => 'link',
+                  'field_type' => 'text',
                   'label' => 'Link to purchase advance tickets',
                   'placeholder' => 'Link to tickets',
                 ) );
