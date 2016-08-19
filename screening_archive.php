@@ -1,15 +1,19 @@
 <?php get_header();?>
 
+
+
 <?php 
 // the query
 
 $args = array(
+    'posts_per_page'=>-1,
     'post_type' => 'screening_details',
     'order'=> 'ASC',
     'orderby' => 'meta_value_num',
     'meta_key' => 'fs_screening_date'
 
     );
+$prev_date = '';
 $the_query = new WP_Query( $args ); 
 
 ?>
@@ -22,17 +26,10 @@ $the_query = new WP_Query( $args );
     <?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
 
     <?php 
-    $filmRuntime = get_post_meta(get_the_ID(),'fs_run_time'); // Returns post metadata value for the field 'featured'
-    $filmDescription = get_post_meta(get_the_ID(),'fs_filmdescription');
     $filmTitle = get_post_meta(get_the_ID(),'fs_title');
     $filmTime = get_post_meta(get_the_ID(),'fs_screening_time');
     $filmDate = get_post_meta(get_the_ID(),'fs_screening_date');
     $filmLocation = get_post_meta(get_the_ID(),'fs_screening_location');
-    $filmYear = get_post_meta(get_the_ID(),'fs_production_year');
-    $filmDirector = get_post_meta(get_the_ID(),'fs_director');
-    $filmWebsite = get_post_meta(get_the_ID(),'fs_film_website');
-    $filmTrailer = get_post_meta(get_the_ID(),'fs_trailer');
-    $filmCountry = get_post_meta(get_the_ID(),'fs_country');
     $filmTickets = get_post_meta(get_the_ID(),'fs_tickets');
 
 
@@ -42,21 +39,28 @@ $the_query = new WP_Query( $args );
 <table>
 <tbody>
     <tr>
+        <?php print_r($filmTime[0]);?>
+
+
         <td>
+        <?php  if ($prev_date != $filmDate[0]):?>
+            <?php if (isset($filmDate[0])):?>
+                <p><?php $datestamp = $filmDate[0];?><?php echo date("F j, Y", $datestamp);?></p>
+            <?php endif;?>
+        <?php endif;?>
+
+        </td>
+
+
+         <td>
 
         <?php if (isset($filmTime[0])):?>
-            <p><?php $timestamp = $filmTime[0];?><?php //echo gmdate("H:i:s", $timestamp);?></p>
+            <p><?php $timestamp = $filmTime[0];?><?php echo date("g:i A", $timestamp);?></p>
         <?php endif;?>
 
         </td>
 
-        <td>
 
-        <?php if (isset($filmDate[0])):?>
-            <p><?php $datestamp = $filmDate[0];?><?php echo gmdate("F j, Y", $datestamp);?></p>
-        <?php endif;?>
-
-        </td>
         <td>
 
         <?php if (isset($filmTitle[0])):?>
@@ -72,6 +76,7 @@ $the_query = new WP_Query( $args );
 
 </table>
 
+                    <?php $prev_date = $filmDate[0];?>
 
     <?php endwhile; ?>
     <!-- end of the loop -->
@@ -83,7 +88,6 @@ $the_query = new WP_Query( $args );
 <?php else : ?>
     <p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
 <?php endif; ?>
-
 
 
 
