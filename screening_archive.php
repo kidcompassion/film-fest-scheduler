@@ -42,7 +42,7 @@ $the_query = new WP_Query( $args );
         <td>
 
         <?php if (isset($filmTime[0])):?>
-            <p><?php echo $filmTime[0];?></p>
+            <p><?php $timestamp = $filmTime[0];?><?php echo gmdate("H:i:s", $timestamp);?></p>
         <?php endif;?>
 
         </td>
@@ -50,7 +50,7 @@ $the_query = new WP_Query( $args );
         <td>
 
         <?php if (isset($filmDate[0])):?>
-            <p><?php echo $filmDate[0];?></p>
+            <p><?php $datestamp = $filmDate[0];?><?php echo gmdate("Y-m-d", $datestamp);?></p>
         <?php endif;?>
 
         </td>
