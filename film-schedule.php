@@ -131,19 +131,13 @@ class Screening {
 
                   ) );
 
-                  // adds a timepicker field to the 1st group
-              x_add_metadata_field( 'fs_screening_time', 'screening_details', array(
-                  'group' => 'x_metaBox1',
-                  'field_type' => 'timepicker',
-                  'label' => 'Screening Time',
-                ) );
+                               // adds a taxonomy select field in the first group
+                x_add_metadata_field( 'fs_screening_date_time', 'screening_details', array(
+                        'group' => 'x_metaBox1',
+                        'field_type' => 'datetimepicker',
+                        'label' => 'Screening Date and Time',
 
-              // adds a datepicker field to the 1st group
-              x_add_metadata_field( 'fs_screening_date', 'screening_details', array(
-                  'group' => 'x_metaBox1',
-                  'field_type' => 'datepicker',
-                  'label' => 'Screening Date',
-                ) );
+                    ) );
 
                 // adds a taxonomy select field in the first group
                 x_add_metadata_field( 'fs_screening_location', 'screening_details', array(
@@ -154,6 +148,7 @@ class Screening {
 
                     ) );
 
+  
 
               // adds a wysiwyg (full editor) field to the 2nd group
               x_add_metadata_field( 'fs_film_description', 'screening_details', array(

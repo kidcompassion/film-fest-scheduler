@@ -10,7 +10,7 @@ $args = array(
     'post_type' => 'screening_details',
     'order'=> 'ASC',
     'orderby' => 'meta_value_num',
-    'meta_key' => 'fs_screening_date'
+    'meta_key' => 'fs_screening_date_time'
 
     );
 $prev_date = '';
@@ -27,10 +27,11 @@ $the_query = new WP_Query( $args );
 
     <?php 
     $filmTitle = get_post_meta(get_the_ID(),'fs_title');
-    $filmTime = get_post_meta(get_the_ID(),'fs_screening_time');
-    $filmDate = get_post_meta(get_the_ID(),'fs_screening_date');
     $filmLocation = get_post_meta(get_the_ID(),'fs_screening_location');
     $filmTickets = get_post_meta(get_the_ID(),'fs_tickets');
+    $filmDateTime = get_post_meta(get_the_ID(), 'fs_screening_date_time');
+
+    $filmDate = date("F j, Y", $filmDateTime[0]);
 
 
     ?>
@@ -39,13 +40,13 @@ $the_query = new WP_Query( $args );
 <table>
 <tbody>
     <tr>
-        <?php print_r($filmTime[0]);?>
+    
 
 
         <td>
-        <?php  if ($prev_date != $filmDate[0]):?>
-            <?php if (isset($filmDate[0])):?>
-                <p><?php $datestamp = $filmDate[0];?><?php echo date("F j, Y", $datestamp);?></p>
+        <?php  if ($prev_date != $filmDate):?>
+            <?php if (isset($filmDateTime[0])):?>
+                <p><?php echo date("F j, Y", $filmDateTime[0]);?></p>
             <?php endif;?>
         <?php endif;?>
 
@@ -54,9 +55,9 @@ $the_query = new WP_Query( $args );
 
          <td>
 
-        <?php if (isset($filmTime[0])):?>
-            <p><?php $timestamp = $filmTime[0];?><?php echo date("g:i A", $timestamp);?></p>
-        <?php endif;?>
+       <?php if (isset($filmDateTime[0])):?>
+                <p><?php echo date("g:i A", $filmDateTime[0]);?></p>
+            <?php endif;?>
 
         </td>
 
@@ -76,7 +77,7 @@ $the_query = new WP_Query( $args );
 
 </table>
 
-                    <?php $prev_date = $filmDate[0];?>
+<?php $prev_date = $filmDate;?>
 
     <?php endwhile; ?>
     <!-- end of the loop -->
